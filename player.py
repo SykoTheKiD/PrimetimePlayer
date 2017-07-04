@@ -18,6 +18,7 @@ class Player(Item):
 	fl = Field()
 	fop = Field()
 	ppg = Field()
+	ppa = Field()
 	shg = Field()
 	sha = Field()
 	gw = Field()
