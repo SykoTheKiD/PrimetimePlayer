@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import sqlite3
-
+import pandas as pd
 DB_FILE = "player_stats.sqlite"
 TABLE_NAME = "stats"
 
@@ -27,8 +27,9 @@ class DataStore:
 		self.conn.commit()
 
 	def fetch_all(self):
-		self.c.execute("SELECT * FROM {tbl}".format(tbl=TABLE_NAME))
-		return self.c.fetchall()
+		query = "SELECT * FROM {tbl}".format(tbl=TABLE_NAME)
+		df = pd.read_sql_query(query, self.conn)
+		return df
 
 	def close(self):
 		self.conn.close()

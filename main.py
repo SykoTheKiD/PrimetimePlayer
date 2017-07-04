@@ -1,6 +1,13 @@
 #!/usr/bin/python3
-import data_store as ds
 
-x = ds.DataStore()
+from data_store import DataStore
 
-print(x.fetch_all())
+db_data = DataStore()
+
+df = db_data.fetch_all()
+df.drop(['id'], 1, inplace=True)
+df.drop(['name'], 1, inplace=True)
+df.drop(['team'], 1, inplace=True)
+print(df)
+
+db_data.close()
