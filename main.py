@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-import pandas as pd
-def main():
-	df = pd.read_csv('dataset/left_wingers.csv')
+import data_store as ds
 
-if __name__ == "__main__":
-	main()
+x = ds.DataStore()
+
+print(x.fetch_all())

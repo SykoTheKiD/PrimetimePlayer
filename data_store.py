@@ -26,7 +26,7 @@ class DataStore:
 		self.c.execute("INSERT INTO {tbl} (name, team, games_played, position, goals, assists, points, plus_minus, pim, hits, bks, fw, fl, fop, ppg, ppa, shg, sha, gw, sog, pct ) VALUES ( '{name}', '{team}', '{games_played}', '{position}', '{goals}', '{assists}', '{points}', '{plus_minus}', '{pim}', '{hits}', '{bks}', '{fw}', '{fl}', '{fop}', '{ppg}', '{ppa}', '{shg}', '{sha}', '{gw}', '{sog}', '{pct}' );".format(tbl=TABLE_NAME, name=str(item["name"]), team=item["team"], games_played=item["games_played"], position=item["position"], goals=item["goals"], assists=item["assists"], points=item["points"], plus_minus=item["plus_minus"], pim=item["pim"], hits=item["hits"], bks=item["bks"], fw=item["fw"], fl=item["fl"], fop=float(item["fop"]), ppg=item["ppg"], ppa=item["ppa"], shg=item["shg"], sha=item["sha"], gw=item["gw"], sog=item["sog"], pct=float(item["pct"])))
 		self.conn.commit()
 
-	def get_all(self, item):
+	def fetch_all(self):
 		self.c.execute("SELECT * FROM {tbl}".format(tbl=TABLE_NAME))
 		return self.c.fetchall()
 
