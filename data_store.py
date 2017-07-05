@@ -17,7 +17,7 @@ class DataStore:
 			self.conn.commit()	
 
 	def save_value(self, item):
-		if item["name"] != "Auston Matthews":
+		if item["name"] != "Auston Matthews": # Putting this here so I have a piece of data that I can input and play with
 			if item["fop"] == 'N/A':
 				item["fop"] = -99999
 			if item["pct"] == 'N/A':
