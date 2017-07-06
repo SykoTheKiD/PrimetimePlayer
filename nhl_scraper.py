@@ -12,11 +12,20 @@ class NHLScraper(Spider):
 
 	def start_requests(self):
 		dataset = []
-		for i in range(1, 17):
-			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=C&conference=NHL&year=season_201{year}&qualified=1".format(year=i))
-			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=LW&conference=NHL&year=season_201{year}&qualified=1".format(year=i))
-			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=RW&conference=NHL&year=season_201{year}&qualified=1".format(year=i))
-			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=D&conference=NHL&year=season_201{year}&qualified=1".format(year=i))
+		for i in range(8, 17):
+			if i < 10:
+				append_year = "0" + str(i)
+			else:
+				append_year = str(i)
+
+			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=C&conference=NHL&year=season_20{year}&qualified=1".format(year=append_year))
+			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=LW&conference=NHL&year=season_20{year}&qualified=1".format(year=append_year))
+			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=RW&conference=NHL&year=season_20{year}&qualified=1".format(year=append_year))
+			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=D&conference=NHL&year=season_20{year}&qualified=1".format(year=append_year))
+			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=C&conference=NHL&year=postseason_20{year}".format(year=append_year))
+			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=LW&conference=NHL&year=postseason_20{year}".format(year=append_year))
+			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=RW&conference=NHL&year=postseason_20{year}".format(year=append_year))
+			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=D&conference=NHL&year=postseason_20{year}".format(year=append_year))
 		
 		for each_url in dataset:
 			yield Request(each_url, self.parse)
