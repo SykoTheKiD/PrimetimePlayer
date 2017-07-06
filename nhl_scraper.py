@@ -5,22 +5,21 @@ from scrapy import Spider
 from player import Player
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
-
-CENTER = "center"
-LEFT_WING = "left_wing"
-RIGHT_WING = "right_wing"
-DEFENSEMAN = "defenseman"
-
-DATASET = {
-	CENTER : "https://ca.sports.yahoo.com/nhl/stats/byposition?pos=C&conference=NHL&year=season_2016&qualified=1",
-	LEFT_WING : "https://ca.sports.yahoo.com/nhl/stats/byposition?pos=LW&conference=NHL&year=season_2016&qualified=1",
-	RIGHT_WING : "https://ca.sports.yahoo.com/nhl/stats/byposition?pos=RW&conference=NHL&year=season_2016&qualified=1",
-	DEFENSEMAN : "https://ca.sports.yahoo.com/nhl/stats/byposition?pos=D&conference=NHL&year=season_2016&qualified=1"
-}
+from scrapy.http.request import Request
 
 class NHLScraper(Spider):
 	name = "stats"
-	start_urls = [DATASET[key] for key in DATASET]
+
+	def start_requests(self):
+		dataset = []
+		for i in range(1, 17):
+			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=C&conference=NHL&year=season_201{year}&qualified=1".format(year=i))
+			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=LW&conference=NHL&year=season_201{year}&qualified=1".format(year=i))
+			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=RW&conference=NHL&year=season_201{year}&qualified=1".format(year=i))
+			dataset.append("https://ca.sports.yahoo.com/nhl/stats/byposition?pos=D&conference=NHL&year=season_201{year}&qualified=1".format(year=i))
+		
+		for each_url in dataset:
+			yield Request(each_url, self.parse)
 
 	def parse(self, response):
 		rows = response.xpath("//table[3]/tr[starts-with(@class, 'ysprow')]")

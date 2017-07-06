@@ -30,6 +30,7 @@ def main():
 	clf.fit(X_train, y_train)
 
 	accuracy = clf.score(X_test, y_test)
+	print("Number of Data Points:", len(df.index), "\n")
 	print("\nPredicted with Accuracy: ", accuracy * 100, "%\n")
 
 	# Prediction Test
