@@ -3,5 +3,5 @@
 ### Input your stats and see what Hockey position you would be best at
 
 #### How do I get setup?
-- You can run `main.py` and see the test case already there
-- Or input your own stats in the Numpy array `eg` in `main.py` and run the program
+- `main.py` gets a small random sample to run against and predict positions for
+- You can change `main.py` to modify it for your use
