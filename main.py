@@ -12,6 +12,7 @@ from sklearn import preprocessing, model_selection, neighbors
 
 def main():
 	print(" \n NHL Player Predictions\n", "="*23)
+	print("Legend:", "LW = Left Wing,", "RW = Right Wing,", "C = Center,", "D = Defenseman")
 	db_data = DataStore()
 	df = db_data.fetch_all()
 	df.drop(['id'], 1, inplace=True)
