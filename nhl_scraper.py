@@ -20,7 +20,7 @@ DATASET = {
 
 class NHLScraper(Spider):
 	name = "stats"
-	start_urls = [DATASET[CENTER]]
+	start_urls = [DATASET[key] for key in DATASET]
 
 	def parse(self, response):
 		rows = response.xpath("//table[3]/tr[starts-with(@class, 'ysprow')]")
